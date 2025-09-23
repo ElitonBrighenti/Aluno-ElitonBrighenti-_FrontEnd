@@ -1,0 +1,30 @@
+<header class="page-header">
+  <h2>{{ id ? 'Editar Aluno' : 'Novo Aluno' }}</h2>
+  <button class="btn-voltar" routerLink="/">🏠 Voltar para Home</button>
+</header>
+
+<form [formGroup]="form" (ngSubmit)="salvar()">
+  <label>
+    Nome:
+    <input type="text" formControlName="nome">
+  </label>
+  <div *ngIf="form.controls['nome'].invalid && form.controls['nome'].touched">
+    Nome é obrigatório e deve ter pelo menos 3 caracteres.
+  </div>
+
+  <label>
+    Curso:
+    <input type="text" formControlName="curso">
+  </label>
+  <div *ngIf="form.controls['curso'].invalid && form.controls['curso'].touched">
+    Curso é obrigatório e deve ter pelo menos 3 caracteres.
+  </div>
+
+  <label>
+    Telefone:
+    <input type="text" formControlName="telefone">
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Salvar</button>
+  <button type="button" (click)="router.navigate(['/alunos'])">Cancelar</button>
+</form>

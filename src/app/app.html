@@ -1,0 +1,12 @@
+<header class="navbar">
+  <h1>CRUD de Alunos</h1>
+  <nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/alunos" routerLinkActive="active">Lista</a>
+    <a routerLink="/alunos/novo" routerLinkActive="active">Novo Aluno</a>
+  </nav>
+</header>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>

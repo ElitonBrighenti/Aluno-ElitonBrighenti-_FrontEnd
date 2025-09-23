@@ -1,0 +1,30 @@
+<header class="page-header">
+  <h2>Lista de Alunos</h2>
+  <button class="btn-voltar" routerLink="/">🏠 Voltar para Home</button>
+</header>
+
+<input type="text" [(ngModel)]="nomeBusca" placeholder="Buscar por nome">
+<button (click)="buscar()">Buscar</button>
+<button (click)="router.navigate(['/alunos/novo'])">Novo Aluno</button>
+
+<table border="1" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Curso</th>
+      <th>Telefone</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let aluno of alunos">
+      <td>{{ aluno.nome }}</td>
+      <td>{{ aluno.curso }}</td>
+      <td>{{ aluno.telefone }}</td>
+      <td>
+        <button (click)="editar(aluno)">Editar</button>
+        <button (click)="apagar(aluno.id!)">Apagar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
