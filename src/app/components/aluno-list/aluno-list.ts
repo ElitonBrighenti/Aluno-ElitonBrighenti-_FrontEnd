@@ -37,7 +37,6 @@ export class AlunoListComponent implements OnInit {
   apagar(id?: string): void {
     if (!id) return;
     if (confirm('Deseja realmente apagar este aluno?')) {
-
       this.alunos = this.alunos.filter(aluno => aluno.id !== id);
 
       this.alunoService.apagar(id).subscribe({
