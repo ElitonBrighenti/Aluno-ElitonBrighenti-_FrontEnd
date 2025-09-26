@@ -25,20 +25,33 @@ export class AlunoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(3)]],
-      curso: ['', [Validators.required, Validators.minLength(3)]],
-      telefone: [''],
+      nome: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
+      ],
+      curso: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
+      ],
+      telefone: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{8,20}$/)],
+      ],
     });
 
     this.id = this.route.snapshot.paramMap.get('id') ?? undefined;
     if (this.id) {
-      this.alunoService.buscarPorId(this.id).subscribe(aluno => {
+      this.alunoService.buscarPorId(this.id).subscribe((aluno) => {
         this.form.patchValue(aluno);
       });
     }
   }
-
   salvar(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
     const aluno: Aluno = this.form.value;
     if (this.id) {
       this.alunoService.editar(this.id, aluno).subscribe(() => this.router.navigate(['/alunos']));

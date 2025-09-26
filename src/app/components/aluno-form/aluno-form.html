@@ -8,23 +8,47 @@
     Nome:
     <input type="text" formControlName="nome">
   </label>
-  <div *ngIf="form.controls['nome'].invalid && form.controls['nome'].touched">
-    Nome é obrigatório e deve ter pelo menos 3 caracteres.
+  <div *ngIf="form.controls['nome'].touched && form.controls['nome'].invalid">
+    <small *ngIf="form.controls['nome'].errors?.['required']">
+      Nome é obrigatório.
+    </small>
+    <small *ngIf="form.controls['nome'].errors?.['minlength']">
+      Nome deve ter pelo menos 3 caracteres.
+    </small>
+    <small *ngIf="form.controls['nome'].errors?.['maxlength']">
+      Nome não pode passar de 100 caracteres.
+    </small>
   </div>
 
   <label>
     Curso:
     <input type="text" formControlName="curso">
   </label>
-  <div *ngIf="form.controls['curso'].invalid && form.controls['curso'].touched">
-    Curso é obrigatório e deve ter pelo menos 3 caracteres.
+  <div *ngIf="form.controls['curso'].touched && form.controls['curso'].invalid">
+    <small *ngIf="form.controls['curso'].errors?.['required']">
+      Curso é obrigatório.
+    </small>
+    <small *ngIf="form.controls['curso'].errors?.['minlength']">
+      Curso deve ter pelo menos 3 caracteres.
+    </small>
+    <small *ngIf="form.controls['curso'].errors?.['maxlength']">
+      Curso não pode passar de 100 caracteres.
+    </small>
   </div>
 
   <label>
     Telefone:
     <input type="text" formControlName="telefone">
   </label>
+  <div *ngIf="form.controls['telefone'].touched && form.controls['telefone'].invalid">
+    <small *ngIf="form.controls['telefone'].errors?.['required']">
+      Telefone é obrigatório.
+    </small>
+    <small *ngIf="form.controls['telefone'].errors?.['pattern']">
+      Telefone deve conter apenas números (8 a 20 dígitos).
+    </small>
+  </div>
 
   <button type="submit" [disabled]="form.invalid">Salvar</button>
-  <button type="button" (click)="router.navigate(['/alunos'])">Cancelar</button>
+  <button type="button" routerLink="/alunos">Cancelar</button>
 </form>
